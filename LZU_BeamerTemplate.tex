@@ -1,0 +1,154 @@
+\documentclass[10pt,aspectratio=43]{beamer}
+
+%%%%----- 宏包区 -----%%%%
+\usepackage{lzu}
+% 参考文献资源（由样式文件加载 biblatex）
+\addbibresource{reference.bib}
+\usepackage{xeCJK}
+\usepackage{amsmath,amsfonts,amssymb,bm}
+\usepackage{color}
+\usepackage{graphicx,hyperref,url}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{booktabs}
+
+% 避免 hyperref 的 PDF 字符串告警（字号、粗体等）
+\pdfstringdefDisableCommands{%%
+  \def\fontsize#1#2{}%%
+  \def\selectfont{}%%
+  \def\textbf#1{#1}%%
+  \def\parencite#1{}%%
+}
+
+% 降低非关键告警噪音（可按需调整）
+\tracinglostchars=0
+\hbadness=10000
+\vbadness=10000
+\hfuzz=50pt
+\vfuzz=50pt
+
+% 字体（保留原模板设置）
+\setsansfont[Path=fonts/]{Helvetica}
+
+% 进入每个 section 时自动插入“目录”页
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{\textbf{目录}}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+%%%%---- 基本信息 ----%%%%
+\title[LZU Beamer 模板演示]{\fontsize{14pt}{18pt}\selectfont LZU Beamer 模板演示}
+\subtitle{\fontsize{10pt}{14pt}\selectfont \textbf{排版示例：目录/图表/公式}}
+
+\author[某某]{\textbf{某某} \\\medskip {\small 兰州大学}}
+\institute[兰州大学]{兰州大学}
+\date[\today]{\today}
+
+\begin{document}
+
+% 标题页
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% 总目录（完整展示）
+\begin{frame}
+  \frametitle{\textbf{目录}}
+  \tableofcontents
+\end{frame}
+
+\section{模板概览}
+
+\begin{frame}[t]{为什么使用本模板}
+  本模板在 SEU Beamer 基础上适配 LZU：
+  \begin{itemize}
+    \item 已集成主题配色、页眉/页脚、标题格式和背景图；
+    \item 开箱即用，示例涵盖常见元素（图/表/公式/多栏排版）；
+    \item 使用 XeLaTeX 编译即可得到中文友好的排版效果；
+    \item 保留 biblatex 支持，便于学术场景引用与生成参考文献。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{页面与结构建议}
+  \begin{itemize}
+    \item 使用 section/subsection 合理组织内容，目录页将自动更新；
+    \item 每页聚焦 1–2 个关键信息点，避免过多文字；
+    \item 图表配合简短说明，必要时给出来源和标签方便引用；
+    \item 保持术语统一，跨页引用请使用 \verb|\\label|/\verb|\\ref|。
+\end{itemize}
+\end{frame}
+
+\section{图表示例}
+
+\begin{frame}[t]{单图示例}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.42\textwidth]{source/lzu_logo.png}
+    \caption{单图示例（演示图片路径与缩放）}
+    \label{fig:single}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[t]{并排子图}
+  \begin{figure}[H]
+    \centering
+    \subfloat[子图A]{\includegraphics[width=0.38\textwidth]{source/lzu_logo.png}}\hspace{1em}
+    \subfloat[子图B]{\includegraphics[width=0.38\textwidth]{source/lzu_title.png}}\\
+    \caption{并排子图示例。参见 \figref{fig:single} 的单图示例。}
+    \label{fig:subfig}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[t]{表格示例（booktabs）}
+  \begin{table}[H]
+    \centering
+    \caption{性能对比示例表}
+    \begin{tabular}{lccc}
+      \toprule
+      方法 & 指标A & 指标B & 指标C \\
+      \midrule
+      方法一 & 0.82 & 0.76 & 0.91 \\
+      方法二 & 0.85 & 0.79 & 0.89 \\
+      方法三 & 0.80 & 0.81 & 0.92 \\
+      \bottomrule
+    \end{tabular}
+    \label{tab:perf}
+  \end{table}
+\end{frame}
+
+\section{公式与环境}
+
+\begin{frame}[t]{常见公式排版}
+  典型的行间与对齐环境：
+  \begin{equation*}
+    E=mc^2
+  \end{equation*}
+
+  多行对齐（\texttt{aligned}）：
+  \begin{equation*}
+    \begin{aligned}
+      a^2+b^2 &= c^2,\\
+      \nabla\cdot \bm{E} &= \frac{\rho}{\varepsilon_0}.
+    \end{aligned}
+  \end{equation*}
+\end{frame}
+
+\begin{frame}[t]{块环境（说明/结论）}
+  \begin{block}{结论}
+    使用 \textbf{块环境} 可以清晰强调结论或要点。
+  \end{block}
+  \begin{alertblock}{提示}
+    在演示型文稿中，建议每页仅包含 1–2 个关键信息点。
+  \end{alertblock}
+\end{frame}
+
+\section{参考文献}
+
+\begin{frame}[t,allowframebreaks]{参考文献}
+  \printbibliography
+\end{frame}
+
+\end{document}

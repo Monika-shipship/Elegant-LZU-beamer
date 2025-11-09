@@ -1,0 +1,222 @@
+%%%
+%%% Inherit definitions from existing themes (DO NOT MODIFY THESE)
+%%%
+
+% Layout scheme for outer elements: split header and footer
+\useoutertheme{split}
+
+% Color scheme for outer elements: use background colors
+\usecolortheme{whale}
+
+% Layout scheme for inner elements: rounded elements
+\useinnertheme[shadow]{rounded}
+
+% Color scheme for inner elements: use foreground colors
+\usecolortheme{orchid}
+
+% --- Project-wide style dependencies and helpers ---
+\RequirePackage{float}
+\RequirePackage{xcolor}
+\RequirePackage{fancyvrb}
+\RequirePackage{graphicx}
+% Biblatex for citations (numeric-comp)
+\RequirePackage[backend=biber,citestyle=numeric-comp,bibstyle=numeric]{biblatex}
+% Common helpers for figure/table references
+\providecommand\figref[1]{\textbf{ͼ~\ref{#1}}}
+\providecommand\tabref[1]{\textbf{��~\ref{#1}}}
+% Default graphics paths (local image + paper assets)
+\graphicspath{{image/}{../����-��ת/����һHodgkinHuxley/image/}}
+
+% MATLAB listings environments (listings-based)
+\RequirePackage{listings}
+\definecolor{codebg}{rgb}{0.96,0.96,0.96}
+\definecolor{matlabKeyword}{HTML}{0000CC}
+\definecolor{matlabComment}{HTML}{008000}
+\definecolor{matlabString}{HTML}{A31515}
+\lstdefinelanguage{Matlab}{
+  morekeywords={break,case,catch,continue,else,elseif,end,for,function,global,if,otherwise,persistent,return,switch,try,while,parfor,spmd,classdef,properties,methods},
+  sensitive=true,
+  morecomment=[l]{\%},
+  morestring=[m]'}
+\lstdefinestyle{matlabstyle}{
+  language=Matlab,
+  basicstyle=\scriptsize\ttfamily,
+  numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=6pt,
+  showstringspaces=false, breaklines=true,
+  keywordstyle=\color{matlabKeyword}, commentstyle=\color{matlabComment}, stringstyle=\color{matlabString},
+  frame=single, framesep=4pt, framerule=0pt,
+  tabsize=2, backgroundcolor=\color{codebg}}
+\lstnewenvironment{matlabcode}[1][]{\lstset{style=matlabstyle,#1}}{}
+\definecolor{output}{gray}{0.4}
+\newenvironment{matlaboutput}{\Verbatim[xleftmargin=1.25em, formatcom=\color{output}]}{\endVerbatim}
+
+
+%%%
+%%% Tweak definitions of inner theme to match personal preferences (MODIFY THESE)
+%%%
+
+% Itemize items: default (triangle), circle, square, ball
+\setbeamertemplate{itemize items}[circle]
+
+% Enumerate items: default, circle, square, ball
+\setbeamertemplate{enumerate items}[circle]
+
+% Outline: default, sections numbered, subsections numbered, circle, square, ball, ball unnumbered
+\setbeamertemplate{sections/subsections in toc}[default]
+
+% ��ÿ�� subsection ��ʼʱ������һ����ʾ��ǰ subsection �����Ŀ¼��ҳ��
+\AtBeginSubsection[]
+{
+  \begin{frame}
+    \frametitle{\insertsubsection}
+    \tableofcontents[currentsection, currentsubsection]
+  \end{frame}
+}
+% ��ÿ�� subsubsection ��ʼʱ������һ����ʾ��ǰ subsubsection �����Ŀ¼��ҳ��
+\AtBeginSubsubsection[]
+{
+  \begin{frame}
+    \frametitle{\insertsubsubsection}
+    \tableofcontents[currentsection, currentsubsection]
+  \end{frame}
+}
+
+% General blocks:
+\setbeamertemplate{blocks}[rounded]
+
+% Title page:
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+
+% Part page:
+\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
+
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{caption}{size=\scriptsize}
+\renewcommand\figurename{ͼ}
+\renewcommand\tablename{��}
+
+% Navigation symbols:
+% \setbeamertemplate{navigation symbols}{}
+
+
+%%%
+%%% Tweak definitions of outer theme to match Radboud (website) style
+%%%
+
+% Background
+% Use LZU background image
+\pgfdeclareimage[width=\paperwidth,height=\paperheight]{bg}{source/lzu_background.png}
+\setbeamertemplate{background}{\pgfuseimage{bg}}
+
+% Colors
+% \usecolortheme[RGB={182,11,45}]{structure} %Red
+% Switch theme color to LZU blue (0068B7)
+\usecolortheme[RGB={0,104,183}]{structure}
+
+% (reverted) keep default background for header logos
+
+\setbeamercolor{frametitle}{parent=subsection in head/foot}
+\setbeamercolor{frametitle right}{parent=section in head/foot}
+
+
+\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+  color(0pt)=(frametitle.bg);
+  color(\paperwidth)=(frametitle right.bg)}
+
+\AtBeginDocument{
+  \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
+    color(0pt)=(bg);
+    color(4pt)=(black!50!bg)}
+}
+
+% Footline: AUTHOR | TITLE | DATE FRAMENUMBER
+
+\defbeamertemplate*{footline}{lzu theme}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortdate
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.435\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+   \begin{beamercolorbox}[wd=0.065\paperwidth,ht=2.25ex,dp=1ex,right]{title in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\defbeamertemplate*{headline}{lzu theme}{%
+  \leavevmode%
+  \@tempdimb=6.4375ex%
+    %\multiply\@tempdimb by\beamer@sectionmax%
+    % Use LZU logo and title images
+    \pgfdeclareimage[height=.85\@tempdimb]{logo}{source/lzu_logo.png}%
+    \pgfdeclareimage[height=.9\@tempdimb]{title_logo}{source/lzu_title.png}%
+  \logo{\pgfuseimage{logo}}%
+  \ifdim\@tempdimb>0pt%
+    \advance\@tempdimb by 1.125ex%
+    \begin{beamercolorbox}[wd=.8\paperwidth,ht=\@tempdimb]{section in head/foot}%
+      \vbox to\@tempdimb{\vfil\insertsectionnavigationhorizontal{.5\textwidth}{\hskip0pt plus1filll}{}\vfil}%
+    \end{beamercolorbox}%
+    %% \begin{beamercolorbox}[wd=.4\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+    %%   \vbox to\@tempdimb{\vfil\textbf{\footnotesize\insertshortinstitute~~}\vfil}%
+    %% \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.135\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\pgfuseimage{title_logo}\vfil}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.065\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\insertlogo\vfil\vfil}%
+    \end{beamercolorbox}%
+  \fi%
+}
+
+\defbeamertemplate*{frametitle}{lzu theme}{%
+  \nointerlineskip%
+  %\vskip-2pt%
+  \hbox{\leavevmode
+    \advance\beamer@leftmargin by -12bp%
+    \advance\beamer@rightmargin by -12bp%
+    \beamer@tempdim=\textwidth%
+    \advance\beamer@tempdim by \beamer@leftmargin%
+    \advance\beamer@tempdim by \beamer@rightmargin%
+    \hskip-\Gm@lmargin\hbox{%
+      \setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}%
+          \vbox{}\vskip-.75ex%
+          \leftskip0.3cm%
+          \rightskip0.3cm plus1fil\leavevmode
+          \insertframetitle%
+          \ifx\insertframesubtitle\@empty%
+            \strut\par%
+          \else
+            \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+          \fi%
+          \nointerlineskip
+          \vbox{}%
+          \end{minipage}}%
+      \beamer@tempdim=\ht\beamer@tempbox%
+      \advance\beamer@tempdim by 2pt%
+      \begin{pgfpicture}{0.0mm}{0pt}{1.00\paperwidth}{\beamer@tempdim}
+        \usebeamercolor{frametitle right}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+        \pgfusepath{clip}
+        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+      \end{pgfpicture}
+      \hskip-\paperwidth%
+      \box\beamer@tempbox%
+    }%
+    \hskip-\Gm@rmargin%
+  }%
+%  \nointerlineskip
+%    \vskip-0.2pt
+%    \hbox to\textwidth{\hskip-\Gm@lmargin\pgfuseshading{beamer@topshade}\hskip-\Gm@rmargin}
+%    \vskip-2pt
+}
+
+% Activate customized templates
+\setbeamertemplate{footline}[lzu theme]
+\setbeamertemplate{headline}[lzu theme]
+\setbeamertemplate{frametitle}[lzu theme]
