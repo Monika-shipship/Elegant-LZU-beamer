@@ -10,3 +10,7 @@ $silent = 0;
 
 # Clean extra aux files we generate with code/listings
 $clean_ext .= ' .pyg .listing .run.xml';
+
+# Put auxiliary files into ./temp, keep PDF and SyncTeX alongside .tex
+$aux_dir = 'temp';
+$emulate_aux_dir = 1;

@@ -1,5 +1,4 @@
-xelatex LZU_BeamerTemplate &
-xelatex LZU_BeamerTemplate
+latexmk -xelatex -synctex=1 -file-line-error -interaction=nonstopmode LZU_BeamerTemplate
 del *.aux /s
 del *.bak /s
 del *.log /s

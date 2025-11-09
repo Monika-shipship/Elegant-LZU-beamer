@@ -19,13 +19,19 @@
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
 \RequirePackage{graphicx}
+% Subfigures and professional table rules
+\RequirePackage{subfig}
+\RequirePackage{booktabs}
 % Biblatex for citations (numeric-comp)
 \RequirePackage[backend=biber,citestyle=numeric-comp,bibstyle=numeric]{biblatex}
-% Common helpers for figure/table references
-\providecommand\figref[1]{\textbf{ͼ~\ref{#1}}}
-\providecommand\tabref[1]{\textbf{��~\ref{#1}}}
-% Default graphics paths (local image + paper assets)
-\graphicspath{{image/}{../����-��ת/����һHodgkinHuxley/image/}}
+% Common helpers for figure/table/equation references (中文)
+\providecommand\figref[1]{\textbf{图~\ref{#1}}}
+\providecommand\tabref[1]{\textbf{表~\ref{#1}}}
+% For equations: do not override amsmath \eqref; provide a convenience macro
+\providecommand\eqrefc[1]{\textbf{式~(\ref{#1})}}
+% 默认图片搜索路径（本仓库）
+% 将图片放在项目内的 image/ 或 source/ 下即可直接 \includegraphics{...}
+\graphicspath{{image/}{source/}}
 
 % MATLAB listings environments (listings-based)
 \RequirePackage{listings}
@@ -64,7 +70,7 @@
 % Outline: default, sections numbered, subsections numbered, circle, square, ball, ball unnumbered
 \setbeamertemplate{sections/subsections in toc}[default]
 
-% ��ÿ�� subsection ��ʼʱ������һ����ʾ��ǰ subsection �����Ŀ¼��ҳ��
+% 在每个 subsection 开始时，创建一个显示当前 subsection 标题和目录的页面
 \AtBeginSubsection[]
 {
   \begin{frame}
@@ -72,7 +78,7 @@
     \tableofcontents[currentsection, currentsubsection]
   \end{frame}
 }
-% ��ÿ�� subsubsection ��ʼʱ������һ����ʾ��ǰ subsubsection �����Ŀ¼��ҳ��
+% 在每个 subsubsection 开始时，创建一个显示当前 subsubsection 标题和目录的页面
 \AtBeginSubsubsection[]
 {
   \begin{frame}
@@ -92,8 +98,8 @@
 
 \setbeamertemplate{caption}[numbered]
 \setbeamerfont{caption}{size=\scriptsize}
-\renewcommand\figurename{ͼ}
-\renewcommand\tablename{��}
+\renewcommand\figurename{图}
+\renewcommand\tablename{表}
 
 % Navigation symbols:
 % \setbeamertemplate{navigation symbols}{}

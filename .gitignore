@@ -181,3 +181,6 @@ TSWLatexianTemp*
 
 # MacOS .DS_Store Files
 *.DS_Store
+
+# Local aux/temp dir created by latexmk ($aux_dir)
+temp/
